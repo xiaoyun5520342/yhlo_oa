@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.NormalController">
+   <left>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="300.0">
+           <children>
+               <TableView fx:id="orderList" prefHeight="499.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <columns>
+                       <TableColumn prefWidth="97.0" text="订单编号" />
+                       <TableColumn prefWidth="98.0" text="状态" />
+                       <TableColumn prefWidth="119.0" text="创建人" />
+                       <TableColumn prefWidth="119.0" text="创建时间" />
+                   </columns>
+               </TableView>
+           </children>
+       </AnchorPane>
+   </left>
+   <center>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+           <children>
+               <Button layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存" />
+               <Button layoutX="484.0" layoutY="39.0" mnemonicParsing="false" text="修改" />
+               <Label layoutX="48.0" layoutY="70.0" text="编号" />
+               <TextField fx:id="orderNo" layoutX="124.0" layoutY="65.0" prefHeight="30.0" prefWidth="189.0" />
+               <Label layoutX="48.0" layoutY="130.0" text="创建人" />
+               <TextField fx:id="createBy" layoutX="124.0" layoutY="125.0" prefHeight="30.0" prefWidth="189.0" />
+               <Label layoutX="48.0" layoutY="191.0" text="创建时间" />
+               <TextField fx:id="createTime" layoutX="124.0" layoutY="186.0" prefHeight="30.0" prefWidth="189.0" />
+               <Label layoutX="48.0" layoutY="247.0" text="订单类型" />
+               <TextField layoutX="124.0" layoutY="242.0" prefHeight="30.0" prefWidth="189.0" />
+               <Label layoutX="48.0" layoutY="299.0" text="备注" />
+               <TextArea layoutX="48.0" layoutY="327.0" prefHeight="143.0" prefWidth="581.0" />
+               <Label layoutX="357.0" layoutY="130.0" text="经销商" />
+               <TextField layoutX="433.0" layoutY="125.0" prefHeight="30.0" prefWidth="189.0" />
+               <Label layoutX="357.0" layoutY="191.0" text="单据状态" />
+               <TextField layoutX="433.0" layoutY="186.0" prefHeight="30.0" prefWidth="189.0" />
+               <Label layoutX="357.0" layoutY="237.0" text="审核状态" />
+               <TextField fx:id="status" layoutX="433.0" layoutY="242.0" prefHeight="30.0" prefWidth="189.0" />
+           </children>
+       </AnchorPane>
+   </center>
+</BorderPane>

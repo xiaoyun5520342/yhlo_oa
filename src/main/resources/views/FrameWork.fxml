@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.FrameWorkController">
+    <top>
+        <MenuBar maxWidth="1000.0" prefHeight="32.0" prefWidth="800.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="订单">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#normal" text="一般订单" />
+                        <MenuItem mnemonicParsing="false" onAction="#roles" text="多角订单" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="发货">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="报表">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="发票管理">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="一般数据">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="系统管理">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="用户设置">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="系统">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#homePage" text="返回首页" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <AnchorPane>
+            <fx:include fx:id="main" source="/views/Main.fxml" />
+            <fx:include fx:id="normal" source="/views/Normal.fxml" />
+            <fx:include fx:id="roles" source="/views/Roles.fxml" />
+        </AnchorPane>
+    </center>
+</BorderPane>
