@@ -21,6 +21,7 @@ public class YhloOaApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 //         Scene scene = new Scene(root, 500, 500);
         Scene scene = new Scene(root);
+        primaryStage.setTitle("订单管理系统");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(CommonUtil.getLogo());
         primaryStage.show();
