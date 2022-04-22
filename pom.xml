@@ -222,6 +222,13 @@
             <artifactId>springboot-javafx-support</artifactId>
             <version>2.1.6</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.kordamp.bootstrapfx</groupId>
+            <artifactId>bootstrapfx-core</artifactId>
+            <version>0.2.4</version>
+        </dependency>
     </dependencies>
 
     <build>

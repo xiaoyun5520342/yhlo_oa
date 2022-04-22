@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -21,7 +22,14 @@ public class YhloOaApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 //         Scene scene = new Scene(root, 500, 500);
         Scene scene = new Scene(root);
+
+        primaryStage.setScene(scene);
+        primaryStage.getScene().getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
+
         primaryStage.setTitle("订单管理系统");
+        primaryStage.resizableProperty().setValue(Boolean.FALSE);//禁用最大化
+       // primaryStage.initStyle(StageStyle.UTILITY);//禁用最大化和最小化
+       // primaryStage.initStyle(StageStyle.UNDECORATED);//全部禁用
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(CommonUtil.getLogo());
         primaryStage.show();
