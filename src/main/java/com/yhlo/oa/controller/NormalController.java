@@ -2,6 +2,7 @@ package com.yhlo.oa.controller;
 
 import com.yhlo.oa.entity.KeyList;
 import com.yhlo.oa.entity.OrderVO;
+import com.yhlo.oa.service.NormalOrderService;
 import com.yhlo.oa.util.DataTypeWrapper;
 import com.yhlo.oa.util.NodeUtil;
 import com.yhlo.oa.util.ResultUtil;
@@ -17,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,6 +38,9 @@ public class NormalController implements Initializable {
     public TextField createBy;
     public TextField createTime;
     public TableView<OrderVO> orderList;
+
+    @Resource
+    private NormalOrderService normalOrderService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,10 +110,16 @@ public class NormalController implements Initializable {
         nodes.stream().forEach(e -> e.setDisable(false));
     }
 
-    public void saveData(ActionEvent event) throws IOException, IllegalAccessException, InstantiationException {
+    public void saveData(){
         log.info("保存订单数据");
         ArrayList<Node> nodes = NodeUtil.getAllTextFiledNodes(orderList.getScene().getRoot());
         nodes.stream().forEach(e -> e.setDisable(true));
+
+        OrderVO order = new OrderVO();
+        order.setOrderNo(orderNo.getText());
+        order.setStatus(status.getText());
+        order.setCreateBy(createBy.getText());
+        normalOrderService.saveOrder(order);
         ResultUtil.getSuccesResult("保存成功！");
     }
 }
