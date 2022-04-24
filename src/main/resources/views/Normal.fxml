@@ -29,35 +29,34 @@
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
            <children>
 <!--               <Button layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存" />-->
-               <Button layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存"  >
+               <Button onAction="#saveData" layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存"  >
                    <styleClass>
                        <String fx:value="btn"/>
                        <String fx:value="btn-primary"/>
                    </styleClass>
                </Button>
-               <Button layoutX="484.0" layoutY="39.0" mnemonicParsing="false" text="修改" >
+               <Button onAction="#updateData" layoutX="484.0" layoutY="39.0" mnemonicParsing="false" text="修改" >
                    <styleClass>
                        <String fx:value="btn"/>
                        <String fx:value="btn-primary"/>
                    </styleClass>
                </Button>
-
                <Label layoutX="48.0" layoutY="70.0" text="编号" />
-               <TextField fx:id="orderNo" layoutX="124.0" layoutY="65.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField fx:id="orderNo" layoutX="124.0" layoutY="65.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="48.0" layoutY="130.0" text="创建人" />
-               <TextField fx:id="createBy" layoutX="124.0" layoutY="125.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField fx:id="createBy" layoutX="124.0" layoutY="125.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="48.0" layoutY="191.0" text="创建时间" />
-               <TextField fx:id="createTime" layoutX="124.0" layoutY="186.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField fx:id="createTime" layoutX="124.0" layoutY="186.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="48.0" layoutY="247.0" text="订单类型" />
-               <TextField layoutX="124.0" layoutY="242.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField layoutX="124.0" layoutY="242.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="48.0" layoutY="299.0" text="备注" />
-               <TextArea layoutX="48.0" layoutY="327.0" prefHeight="143.0" prefWidth="581.0" />
+               <TextArea layoutX="48.0" layoutY="327.0" prefHeight="143.0" prefWidth="581.0" disable="true"/>
                <Label layoutX="357.0" layoutY="130.0" text="经销商" />
-               <TextField layoutX="433.0" layoutY="125.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField layoutX="433.0" layoutY="125.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="357.0" layoutY="191.0" text="单据状态" />
-               <TextField layoutX="433.0" layoutY="186.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField layoutX="433.0" layoutY="186.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="357.0" layoutY="237.0" text="审核状态" />
-               <TextField fx:id="status" layoutX="433.0" layoutY="242.0" prefHeight="30.0" prefWidth="189.0" />
+               <TextField fx:id="status" layoutX="433.0" layoutY="242.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
            </children>
        </AnchorPane>
    </center>

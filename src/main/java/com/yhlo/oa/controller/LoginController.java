@@ -1,6 +1,10 @@
 package com.yhlo.oa.controller;
 
+import com.yhlo.oa.entity.SysUser;
+import com.yhlo.oa.services.ISysUserService;
 import com.yhlo.oa.util.CommonUtil;
+import com.yhlo.oa.util.StringUtils;
+import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -26,19 +31,34 @@ import java.util.ResourceBundle;
  * @description: 登录
  **/
 @Slf4j
-@RestController
-public class LoginController  {
+//@RestController
+@FXMLController
+public class LoginController  implements  Initializable{
 
     public TextField textUserAccount;
 
     public PasswordField textPassword;
 
+    @Autowired
+    private ISysUserService userService;
 
 
     public void login(ActionEvent event) throws IOException {
         log.info(textUserAccount.getText() + textPassword.getText());
         String userAccount = textUserAccount.getText();
         String password = textPassword.getText();
+
+        // 用户名或密码为空 错误
+        if (StringUtils.isEmpty(userAccount) || StringUtils.isEmpty(password))
+        {
+            CommonUtil._alertError("","用户名或密码为空,请检查！！！");
+            return;
+        }
+
+        // 查询用户信息
+        SysUser user = userService.selectUserByLoginName(userAccount);
+        System.err.println("user=="+user);
+
         if (!"admin".equals(userAccount) || !"admin".equals(password)) {
             CommonUtil._alertError("","用户名或密码错误,请检查！！！");
 
@@ -70,4 +90,8 @@ public class LoginController  {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }
