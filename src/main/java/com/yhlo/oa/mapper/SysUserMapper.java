@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * 
  * @author ruoyi
  */
-@Repository
+
 public interface SysUserMapper
 {
     /**
