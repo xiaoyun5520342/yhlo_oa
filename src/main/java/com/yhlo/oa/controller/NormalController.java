@@ -58,7 +58,7 @@ public class NormalController implements Initializable {
 
         ObservableList<TableColumn<OrderVO, ?>> columns = orderList.getColumns();
         columns.clear();
-        // 开始将列的值与当前的javabean的属性进行绑定
+        // 将列的值与当前的javabean的属性进行绑定
         List<KeyList> keyList = DataTypeWrapper.getKeyList(OrderVO.class);
         keyList.stream().forEach(e -> {
             TableColumn<OrderVO, Object> column = new TableColumn();
