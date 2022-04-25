@@ -3,11 +3,9 @@ package com.yhlo.oa.controller;
 import com.yhlo.oa.entity.KeyList;
 import com.yhlo.oa.entity.OrderVO;
 import com.yhlo.oa.service.NormalOrderService;
-import com.yhlo.oa.service.iml.NormalOrderServiceImpl;
 import com.yhlo.oa.util.DataTypeWrapper;
 import com.yhlo.oa.util.NodeUtil;
 import com.yhlo.oa.util.ResultUtil;
-import com.yhlo.oa.util.SpringBeanUtil;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -42,26 +40,24 @@ public class NormalController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        normalOrderService = SpringBeanUtil.getBean(NormalOrderServiceImpl.class);
-
+        log.info("进入多角订单！");
+        // 这里应该从iotdb数据库中加载数据
         ObservableList<OrderVO> items = orderList.getItems();
         items.clear();
-        items.addAll(this.getDataList());
+        items.addAll(getDataList());
 
         orderList.setRowFactory(tv -> {
-            TableRow<OrderVO> row = new TableRow<>();
             tv.setOnMouseClicked(event -> {
                 OrderVO order = tv.getSelectionModel().getSelectedItem();
                 if (event.getClickCount() == 1 && null != order) {
                     this.getDetailInfo(order);
                 }
             });
-            return row;
+            return new TableRow<>();
         });
 
         ObservableList<TableColumn<OrderVO, ?>> columns = orderList.getColumns();
         columns.clear();
-
         // 开始将列的值与当前的javabean的属性进行绑定
         List<KeyList> keyList = DataTypeWrapper.getKeyList(OrderVO.class);
         keyList.stream().forEach(e -> {
