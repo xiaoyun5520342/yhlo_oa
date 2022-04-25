@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.NormalController">
+<?import java.lang.String?>
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.NormalController">
    <left>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="300.0">
            <children>
@@ -25,10 +26,21 @@
        </AnchorPane>
    </left>
    <center>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" >
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
            <children>
-               <Button layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存" onAction="#saveData"/>
-               <Button layoutX="484.0" layoutY="39.0" mnemonicParsing="false" text="修改" onAction="#updateData"/>
+<!--               <Button layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存" />-->
+               <Button onAction="#saveData" layoutX="572.0" layoutY="39.0" mnemonicParsing="false" text="保存"  >
+                   <styleClass>
+                       <String fx:value="btn"/>
+                       <String fx:value="btn-primary"/>
+                   </styleClass>
+               </Button>
+               <Button onAction="#updateData" layoutX="484.0" layoutY="39.0" mnemonicParsing="false" text="修改" >
+                   <styleClass>
+                       <String fx:value="btn"/>
+                       <String fx:value="btn-primary"/>
+                   </styleClass>
+               </Button>
                <Label layoutX="48.0" layoutY="70.0" text="编号" />
                <TextField fx:id="orderNo" layoutX="124.0" layoutY="65.0" prefHeight="30.0" prefWidth="189.0" disable="true"/>
                <Label layoutX="48.0" layoutY="130.0" text="创建人" />
