@@ -3,6 +3,7 @@ package com.yhlo.oa.util;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.stage.Stage;
 
 /**
  * @create: 2022-04-14 16:53
@@ -10,30 +11,14 @@ import javafx.scene.control.DialogPane;
  **/
 public class ResultUtil {
 
-    public static void getSuccesResult(String text) {
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        DialogPane dialogPane = dialogPane(text, "确定");
-        alert.setDialogPane(dialogPane);
-        alert.setHeight(200);
-        alert.setWidth(300);
-        alert.show();
-    }
-
-    public static void getErrorResult(String text) {
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        DialogPane dialogPane = dialogPane(text, "确定");
-        alert.setDialogPane(dialogPane);
-        alert.setHeight(200);
-        alert.setWidth(300);
-        alert.setContentText(text);
-    }
-
     public static void getWarringResult(String text) {
         Alert alert = new Alert(Alert.AlertType.NONE);
         DialogPane dialogPane = dialogPane(text, "确定");
         alert.setDialogPane(dialogPane);
         alert.setHeight(200);
         alert.setWidth(300);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(CommonUtil.getLogo());
         alert.show();
     }
 

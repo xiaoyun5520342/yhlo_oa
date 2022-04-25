@@ -1,11 +1,11 @@
-package com.yhlo.oa.services.impl;
+package com.yhlo.oa.service.iml;
 
 import com.yhlo.oa.entity.SysRole;
 import com.yhlo.oa.entity.SysUser;
 import com.yhlo.oa.entity.SysUserRole;
 import com.yhlo.oa.mapper.SysRoleMapper;
 import com.yhlo.oa.mapper.SysUserMapper;
-import com.yhlo.oa.services.ISysUserService;
+import com.yhlo.oa.service.SysUserService;
 import com.yhlo.oa.util.Convert;
 import com.yhlo.oa.util.DataScope;
 import com.yhlo.oa.util.ServiceException;
@@ -27,7 +27,8 @@ import java.util.stream.Collectors;
  * @author ruoyi
  */
 @Slf4j
-public class SysUserServiceImpl implements ISysUserService {
+@Service
+public class SysUserServiceImpl implements SysUserService {
 
     @Resource
     private SysUserMapper userMapper;
@@ -79,9 +80,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public SysUser selectUserByLoginName(String userName) {
-//        return userMapper.selectUserByLoginName(userName);
-        return null;
-
+        return userMapper.selectUserByLoginName(userName);
     }
 
 

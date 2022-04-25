@@ -3,11 +3,12 @@ package com.yhlo.oa.controller;
 import com.yhlo.oa.entity.KeyList;
 import com.yhlo.oa.entity.OrderVO;
 import com.yhlo.oa.service.NormalOrderService;
+import com.yhlo.oa.service.iml.NormalOrderServiceImpl;
 import com.yhlo.oa.util.DataTypeWrapper;
 import com.yhlo.oa.util.NodeUtil;
 import com.yhlo.oa.util.ResultUtil;
+import com.yhlo.oa.util.SpringBeanUtil;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
@@ -18,8 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +38,12 @@ public class NormalController implements Initializable {
     public TextField createTime;
     public TableView<OrderVO> orderList;
 
-    @Resource
     private NormalOrderService normalOrderService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        log.info("进入多角订单！");
+        normalOrderService = SpringBeanUtil.getBean(NormalOrderServiceImpl.class);
+
         ObservableList<OrderVO> items = orderList.getItems();
         items.clear();
         items.addAll(this.getDataList());
@@ -110,7 +109,7 @@ public class NormalController implements Initializable {
         nodes.stream().forEach(e -> e.setDisable(false));
     }
 
-    public void saveData(){
+    public void saveData() {
         log.info("保存订单数据");
         ArrayList<Node> nodes = NodeUtil.getAllTextFiledNodes(orderList.getScene().getRoot());
         nodes.stream().forEach(e -> e.setDisable(true));
@@ -120,6 +119,6 @@ public class NormalController implements Initializable {
         order.setStatus(status.getText());
         order.setCreateBy(createBy.getText());
         normalOrderService.saveOrder(order);
-        ResultUtil.getSuccesResult("保存成功！");
+        ResultUtil.getWarringResult("保存成功！");
     }
 }
