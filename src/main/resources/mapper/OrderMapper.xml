@@ -12,4 +12,12 @@
            sysdate()
         )
     </insert>
+
+    <select id="queryOrderList" resultType="com.yhlo.oa.entity.OrderVO">
+        SELECT ORDER_NO as orderNo,
+               STATUS   as status,
+               CRATE_BY as createBy,
+               date_format(CRATE_TIME,'%Y-%m-%d %H:%i:%S') as createTime
+          FROM ORDER_INFO
+    </select>
 </mapper>

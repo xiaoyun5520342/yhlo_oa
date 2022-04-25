@@ -3,9 +3,11 @@ package com.yhlo.oa.controller;
 import com.yhlo.oa.entity.KeyList;
 import com.yhlo.oa.entity.OrderVO;
 import com.yhlo.oa.service.NormalOrderService;
+import com.yhlo.oa.service.iml.NormalOrderServiceImpl;
 import com.yhlo.oa.util.DataTypeWrapper;
 import com.yhlo.oa.util.NodeUtil;
 import com.yhlo.oa.util.ResultUtil;
+import com.yhlo.oa.util.SpringBeanUtil;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -40,6 +42,8 @@ public class NormalController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        normalOrderService = SpringBeanUtil.getBean(NormalOrderServiceImpl.class);
+
         log.info("进入多角订单！");
         // 这里应该从iotdb数据库中加载数据
         ObservableList<OrderVO> items = orderList.getItems();
@@ -69,22 +73,7 @@ public class NormalController implements Initializable {
     }
 
     private List<OrderVO> getDataList() {
-        OrderVO orderVO = new OrderVO();
-        orderVO.setOrderNo("11111");
-        orderVO.setStatus("有效");
-        orderVO.setCreateBy("张三");
-        orderVO.setCreateTime("2022-04-01");
-
-        OrderVO orderVO2 = new OrderVO();
-        orderVO2.setOrderNo("222222");
-        orderVO2.setStatus("无效");
-        orderVO2.setCreateBy("李四");
-        orderVO2.setCreateTime("2022-04-11");
-
-        List<OrderVO> list = new ArrayList<>();
-        list.add(orderVO);
-        list.add(orderVO2);
-        return list;
+        return normalOrderService.queryOrderList();
     }
 
     private void getDetailInfo(OrderVO order) {
