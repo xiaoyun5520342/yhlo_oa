@@ -57,9 +57,13 @@ public class LogAspect {
 
     @AfterReturning(pointcut = "excute()", returning = "rtn")
     public Object doAfter(Object rtn) {
+        if (null == rtn || null == START_TIME_THREAD_LOCAL || null == START_TIME_THREAD_LOCAL.get()) {
+            log.info("出参为空");
+            return rtn;
+        }
         long endTime = System.currentTimeMillis();
         long begin = START_TIME_THREAD_LOCAL.get();
-        log.info("{} 出参为:{}, 耗时:{} ms",LOG_PREFIX_THREAD_LOCAL.get(), rtn, endTime - begin);
+        log.info("{} 出参为:{}, 耗时:{} ms", LOG_PREFIX_THREAD_LOCAL.get(), rtn, endTime - begin);
         destoryThreadLocal();
         return rtn;
     }

@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ import java.io.IOException;
  * @description: 登录
  **/
 @Slf4j
-@Component
+@RestController
 public class LoginController {
 
     public TextField textUserAccount;
@@ -31,6 +32,14 @@ public class LoginController {
 
     @Autowired
     private NormalOrderService normalOrderService;
+
+    @GetMapping("/test")
+    public String test(){
+        OrderVO orderVO = new OrderVO();
+        orderVO.setOrderNo(new OrderUtil().getInstance().generaterOrderNo(OrderTypeEnum.NORMAL));
+        normalOrderService.saveOrder(orderVO);
+        return "hello world!";
+    }
 
     public void login() throws IOException {
         log.info(textUserAccount.getText() + textPassword.getText());

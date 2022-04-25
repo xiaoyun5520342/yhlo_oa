@@ -3,14 +3,17 @@ package com.yhlo.oa;
 import com.yhlo.oa.config.SpringFXMLLoader;
 import com.yhlo.oa.util.CommonUtil;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @MapperScan(basePackages = {"com.yhlo.oa.mapper"})
-@SpringBootApplication(scanBasePackages = {"com.yhlo.oa"})
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class }, scanBasePackages = {"com.yhlo.oa"})
 public class YhloOaApplication extends Application {
 
     private static final SpringFXMLLoader loader = new SpringFXMLLoader();
