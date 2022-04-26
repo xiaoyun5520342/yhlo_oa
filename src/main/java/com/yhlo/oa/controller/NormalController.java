@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -40,12 +41,13 @@ public class NormalController implements Initializable {
 
     private NormalOrderService normalOrderService;
 
+    private final static String[] ROWS = {"orderNo", "status", "createBy", "createTime"};
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         normalOrderService = SpringBeanUtil.getBean(NormalOrderServiceImpl.class);
 
         log.info("进入多角订单！");
-        // 这里应该从iotdb数据库中加载数据
         ObservableList<OrderVO> items = orderList.getItems();
         items.clear();
         items.addAll(getDataList());
@@ -64,12 +66,14 @@ public class NormalController implements Initializable {
         columns.clear();
         // 将列的值与当前的javabean的属性进行绑定
         List<KeyList> keyList = DataTypeWrapper.getKeyList(OrderVO.class);
-        keyList.stream().forEach(e -> {
+        for (int i = 0; i < keyList.size(); i++) {
+            String key = ROWS[i];
+            Optional<KeyList> keys = keyList.stream().filter(e-> e.getKey().equals(key)).findFirst();
             TableColumn<OrderVO, Object> column = new TableColumn();
-            column.setText(e.getLabel());
-            column.setCellValueFactory(new PropertyValueFactory(e.getKey()));
+            column.setText(keys.get().getLabel());
+            column.setCellValueFactory(new PropertyValueFactory(key));
             columns.add(column);
-        });
+        }
     }
 
     private List<OrderVO> getDataList() {
