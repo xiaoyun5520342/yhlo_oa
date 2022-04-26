@@ -15,6 +15,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -53,17 +58,36 @@ public class LoginController implements Initializable {
             return;
         }
 
-        // 查询用户信息
-        SysUser user = sysUserService.selectUserByLoginName(userAccount);
-        if (null == user) {
-            ResultUtil.getWarringResult("用户不存在！");
-            return;
+        UsernamePasswordToken token = new UsernamePasswordToken(userAccount, password, false);
+        Subject subject = SecurityUtils.getSubject();
+        try
+        {
+            subject.login(token);
+
+        }
+        catch (AuthenticationException e)
+        {
+            String msg = "用户或密码错误";
+            if (StringUtils.isNotEmpty(e.getMessage()))
+            {
+                msg = e.getMessage();
+            }
+            ResultUtil.getWarringResult(msg);
         }
 
-        if (!password.equals(user.getPassword())) {
-            ResultUtil.getWarringResult("密码不正确！");
-            return;
-        }
+        // 查询用户信息
+//        SysUser user = sysUserService.selectUserByLoginName(userAccount);
+//        if (null == user) {
+//            ResultUtil.getWarringResult("用户不存在！");
+//            return;
+//        }
+//
+//        String encryptPassword = encryptPassword(user.getLoginName(),password,user.getSalt());
+//
+//        if (!encryptPassword.equals(user.getPassword())) {
+//            ResultUtil.getWarringResult("密码不正确！");
+//            return;
+//        }
 
         skipMain();
     }
@@ -84,5 +108,10 @@ public class LoginController implements Initializable {
         if (window instanceof Stage) {
             ((Stage) window).close();
         }
+    }
+
+    public String encryptPassword(String loginName, String password, String salt)
+    {
+        return new Md5Hash(loginName + password + salt).toHex();
     }
 }

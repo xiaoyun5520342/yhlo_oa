@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Unauth">
+   <children>
+      <Pane layoutX="206.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="69.0" layoutY="58.0" text="你无此操作权限" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
