@@ -66,7 +66,7 @@ public class NormalController implements Initializable {
         columns.clear();
         // 将列的值与当前的javabean的属性进行绑定
         List<KeyList> keyList = DataTypeWrapper.getKeyList(OrderVO.class);
-        for (int i = 0; i < keyList.size(); i++) {
+        for (int i = 0; i < ROWS.length; i++) {
             String key = ROWS[i];
             Optional<KeyList> keys = keyList.stream().filter(e-> e.getKey().equals(key)).findFirst();
             TableColumn<OrderVO, Object> column = new TableColumn();
