@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -40,55 +41,43 @@ public class NormalController implements Initializable {
 
     private NormalOrderService normalOrderService;
 
+    private final static String[] ROWS = {"orderNo", "status", "createBy", "createTime"};
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         normalOrderService = SpringBeanUtil.getBean(NormalOrderServiceImpl.class);
 
+        log.info("进入多角订单！");
         ObservableList<OrderVO> items = orderList.getItems();
         items.clear();
-        items.addAll(this.getDataList());
+        items.addAll(getDataList());
 
         orderList.setRowFactory(tv -> {
-            TableRow<OrderVO> row = new TableRow<>();
             tv.setOnMouseClicked(event -> {
                 OrderVO order = tv.getSelectionModel().getSelectedItem();
                 if (event.getClickCount() == 1 && null != order) {
                     this.getDetailInfo(order);
                 }
             });
-            return row;
+            return new TableRow<>();
         });
 
         ObservableList<TableColumn<OrderVO, ?>> columns = orderList.getColumns();
         columns.clear();
-
-        // 开始将列的值与当前的javabean的属性进行绑定
+        // 将列的值与当前的javabean的属性进行绑定
         List<KeyList> keyList = DataTypeWrapper.getKeyList(OrderVO.class);
-        keyList.stream().forEach(e -> {
+        for (int i = 0; i < ROWS.length; i++) {
+            String key = ROWS[i];
+            Optional<KeyList> keys = keyList.stream().filter(e-> e.getKey().equals(key)).findFirst();
             TableColumn<OrderVO, Object> column = new TableColumn();
-            column.setText(e.getLabel());
-            column.setCellValueFactory(new PropertyValueFactory(e.getKey()));
+            column.setText(keys.get().getLabel());
+            column.setCellValueFactory(new PropertyValueFactory(key));
             columns.add(column);
-        });
+        }
     }
 
     private List<OrderVO> getDataList() {
-        OrderVO orderVO = new OrderVO();
-        orderVO.setOrderNo("11111");
-        orderVO.setStatus("有效");
-        orderVO.setCreateBy("张三");
-        orderVO.setCreateTime("2022-04-01");
-
-        OrderVO orderVO2 = new OrderVO();
-        orderVO2.setOrderNo("222222");
-        orderVO2.setStatus("无效");
-        orderVO2.setCreateBy("李四");
-        orderVO2.setCreateTime("2022-04-11");
-
-        List<OrderVO> list = new ArrayList<>();
-        list.add(orderVO);
-        list.add(orderVO2);
-        return list;
+        return normalOrderService.queryOrderList();
     }
 
     private void getDetailInfo(OrderVO order) {
